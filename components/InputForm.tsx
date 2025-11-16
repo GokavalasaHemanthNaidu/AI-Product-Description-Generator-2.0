@@ -1,6 +1,6 @@
 import React from 'react';
-import type { ProductData } from '../types.ts';
-import LoaderIcon from './icons/LoaderIcon.tsx';
+import type { ProductData } from '../types';
+import LoaderIcon from './icons/LoaderIcon';
 
 interface InputFormProps {
   productData: ProductData;
