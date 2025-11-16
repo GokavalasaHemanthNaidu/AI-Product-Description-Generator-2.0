@@ -1,10 +1,9 @@
-
 import React, { useState, useCallback } from 'react';
-import type { ProductData } from './types';
-import { generateDescription } from './services/geminiService';
-import Header from './components/Header';
-import InputForm from './components/InputForm';
-import ResultDisplay from './components/ResultDisplay';
+import type { ProductData } from './types.ts';
+import { generateDescription } from './services/geminiService.ts';
+import Header from './components/Header.tsx';
+import InputForm from './components/InputForm.tsx';
+import ResultDisplay from './components/ResultDisplay.tsx';
 
 const App: React.FC = () => {
   const [productData, setProductData] = useState<ProductData>({

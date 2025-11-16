@@ -1,6 +1,5 @@
-
 import { GoogleGenAI } from "@google/genai";
-import type { ProductData } from '../types';
+import type { ProductData } from '../types.ts';
 
 export async function generateDescription(data: ProductData): Promise<string> {
   const { productName, keyFeatures, targetAudience } = data;
