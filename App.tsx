@@ -46,10 +46,14 @@ const App: React.FC = () => {
   }, [productData]);
 
   return (
-    <div className="min-h-screen bg-slate-900 flex flex-col items-center p-4 sm:p-6 lg:p-8">
-      <div className="w-full max-w-2xl mx-auto">
+    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-[#0a0f1c] to-slate-950 flex flex-col items-center p-4 sm:p-8 lg:p-12 relative overflow-hidden">
+      {/* Decorative background glows */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-500/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+      
+      <div className="w-full max-w-3xl mx-auto z-10">
         <Header />
-        <main>
+        <main className="mt-8 space-y-8">
           <InputForm
             productData={productData}
             onInputChange={handleInputChange}
