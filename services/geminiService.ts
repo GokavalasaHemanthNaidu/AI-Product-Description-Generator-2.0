@@ -1,23 +1,27 @@
 import { GoogleGenAI } from "@google/genai";
 import type { ProductData } from '../types';
 
-// Safely access the API key using Vite's import.meta.env or the defined process fallback
+// Safely access the API key, prioritizing localStorage for "Bring Your Own Key" support
 const getApiKey = () => {
-  // Try Vite env variables first (best practice)
+  // 1. Try localStorage first
+  try {
+    const localKey = localStorage.getItem('GEMINI_API_KEY');
+    if (localKey) return localKey;
+  } catch (e) {}
+
+  // 2. Try Vite env variables
   if (import.meta.env && import.meta.env.VITE_GEMINI_API_KEY) {
     return import.meta.env.VITE_GEMINI_API_KEY;
   }
   
-  // Fallback to the define plugin replacement if it exists
+  // 3. Fallback to the define plugin replacement if it exists
   try {
     if (typeof process !== 'undefined' && process.env && process.env.API_KEY) {
       return process.env.API_KEY;
     }
-  } catch (e) {
-    // Ignore ReferenceError for process
-  }
+  } catch (e) {}
   
-  // Try direct replacement if Vite replaced it
+  // 4. Try direct replacement
   try {
     // @ts-ignore
     if (typeof API_KEY !== 'undefined') return API_KEY;
@@ -32,7 +36,7 @@ export async function generateDescription(data: ProductData): Promise<string> {
   const apiKey = getApiKey();
 
   if (!apiKey) {
-    throw new Error("API key not found. Please create a .env.local file with VITE_GEMINI_API_KEY=your_key and restart the server.");
+    throw new Error("No API Key found. Please add your Gemini API Key in the settings at the top right.");
   }
 
   const ai = new GoogleGenAI({ apiKey });
